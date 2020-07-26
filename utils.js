@@ -12,6 +12,22 @@ class Food {
     }
 }
 
+class Player {
+    id;
+    x;
+    y;
+    radius = 30;
+    score = 0;
+
+    constructor(x, y, radius) {
+        this.x = x;
+        this.y = y;
+        this.id = getRandomString();
+        this.radius = radius || 30;
+    }
+}
+exports.Player = Player;
+
 /**
  * Returns a random number between min (inclusive) and max (exclusive)
  */
@@ -46,10 +62,11 @@ function getRandomString(length = 16) {
 exports.getRandomString = getRandomString;
 
 function generateFood(scene, foodPoints, fraction=1.0) {
-    const amount = ((scene.width * scene.height / 7000) - foodPoints.length) * fraction;
+    const amount = ((scene.width * scene.height / 5000) - foodPoints.length) * fraction;
     const newFood = [];
     for (let i = 0; i < amount; i++) {
-        newFood.push(new Food(getRandomInt(0, scene.width), getRandomInt(0, scene.height)));
+        // don't spawn near the edge
+        newFood.push(new Food(getRandomInt(20, scene.width - 20), getRandomInt(20, scene.height - 20)));
     }
     return newFood;
 }
