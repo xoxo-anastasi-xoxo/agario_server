@@ -62,7 +62,8 @@ function getRandomString(length = 16) {
 exports.getRandomString = getRandomString;
 
 function generateFood(scene, foodPoints, fraction=1.0) {
-    const amount = ((scene.width * scene.height / 5000) - foodPoints.length) * fraction;
+    // TODO научиться с клиента регулировать плотность еды на поле
+    const amount = ((scene.width * scene.height / 20000) - foodPoints.length) * fraction;
     const newFood = [];
     for (let i = 0; i < amount; i++) {
         // don't spawn near the edge
